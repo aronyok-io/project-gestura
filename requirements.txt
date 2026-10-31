@@ -1,4 +1,9 @@
-opencv-python
-mediapipe
-numpy
-pyautogui
+# Windows runtime. Use Python 3.12 (64-bit) for the demonstration environment.
+# MediaPipe uses the contrib OpenCV package; do not install a second cv2 distribution.
+mediapipe==0.10.21
+opencv-contrib-python==4.11.0.86
+numpy==1.26.4
+pillow==11.1.0
+pyautogui==0.9.54; sys_platform == "win32"
+pycaw>=20240210; sys_platform == "win32"
+comtypes==1.4.10; sys_platform == "win32"
