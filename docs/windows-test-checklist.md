@@ -1,6 +1,6 @@
 # Windows acceptance test
 
-These checks require Ankit's hardware; automated logic tests do not replace them.
+automated logic tests do not replace them.
 
 - Install into a fresh Python virtual environment using requirements.txt.
 - Verify the included model is present in models/, then launch from a different working directory as well.
