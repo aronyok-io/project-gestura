@@ -62,3 +62,10 @@ class WindowsControllerTests(unittest.TestCase):
         audio.SetMute.assert_called_with(1, None)
         self.controller.media('unmute')
         audio.SetMute.assert_called_with(0, None)
+
+    def test_failsafe_without_mouse_action(self):
+        self.mouse.failSafeCheck.side_effect = RuntimeError('Fail-safe triggered')
+        with self.assertRaisesRegex(RuntimeError, 'Fail-safe'):
+            self.controller.check_failsafe()
+        self.mouse.moveTo.assert_not_called()
+        self.mouse.click.assert_not_called()

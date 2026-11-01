@@ -93,6 +93,8 @@ class Runner:
                     self.frames.put_nowait(rgb)
                 if self.stop_event.is_set():
                     break
+                if state.enabled and not self.mock:
+                    controller.check_failsafe()
                 was_paused = state.paused
                 mapper.process(sample, state, now)
                 if state.paused != was_paused:

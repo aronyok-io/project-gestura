@@ -34,6 +34,9 @@ class WindowsController:
         self.previous = tuple(a + (b - a) * self.smoothing for a, b in zip(self.previous, target))
         self.mouse.moveTo(*(round(v) for v in self.previous), duration=0)
 
+    def check_failsafe(self):
+        self.mouse.failSafeCheck()
+
     def click(self):
         self.mouse.click()
         self.emit("Left click")
