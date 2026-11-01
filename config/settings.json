@@ -1,0 +1,8 @@
+{
+  "camera_index": 0,
+  "gesture_delay": 0.12,
+  "pinch_press": 0.30,
+  "pinch_release": 0.42,
+  "pinch_delay": 0.10,
+  "smoothing": 0.35
+}
