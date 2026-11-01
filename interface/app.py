@@ -33,7 +33,7 @@ class App(tk.Tk):
         self.preview.pack(fill="both", expand=True, padx=20, pady=8)
         ttk.Label(self, textvariable=self.status).pack()
         ttk.Label(self, textvariable=self.gesture, font=("Arial", 14)).pack(pady=5)
-        ttk.Label(self, text="Mouse: point → move · pinch → click · victory → scroll\nMedia: thumbs → volume · fist → mute · palm → unmute", justify="center").pack()
+        ttk.Label(self, text="Mouse: point → move · pinch → click · victory → scroll · fist/palm → pause/resume\nMedia: thumbs → volume · fist → mute · palm → unmute", justify="center").pack()
         ttk.Label(self, text="Esc stops while this window has focus. On Windows, move the physical mouse to a corner for fail-safe.", wraplength=800).pack(pady=5)
         if mock:
             self.mock_controls()

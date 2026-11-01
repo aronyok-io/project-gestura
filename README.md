@@ -5,7 +5,7 @@ A Windows desktop application for local webcam hand tracking, mouse control and 
 ## Run on Windows
 
 1. Install **64-bit Python 3.12**, including Tcl/Tk and the Python launcher.
-2. Download/clone this branch and run `scripts\setup_windows.bat` once.
+2. Download/clone the repository and run `scripts\setup_windows.bat` once.
 3. Run `scripts\run_windows.bat`.
 4. Select Mouse or Media mode, start tracking, then enable controls.
 
@@ -17,6 +17,7 @@ Stop disables control and releases the camera. Moving the physical pointer into 
 | Mouse | Pointing index | Move cursor |
 | Mouse | Thumb/index pinch | Single left click; release before another click |
 | Mouse | Victory sign | Scroll vertically |
+| Mouse | Fist / open palm | Pause / resume cursor control |
 | Media | Thumb up/down | Volume +/-5% per gesture |
 | Media | Fist/open palm | Mute/unmute |
 

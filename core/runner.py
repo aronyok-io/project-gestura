@@ -73,6 +73,7 @@ class Runner:
                         break
                     if command == "enabled":
                         state.enabled = value
+                        state.paused = False
                         mapper.reset()
                     elif command == "mode":
                         state.set_mode(value)
@@ -92,7 +93,10 @@ class Runner:
                     self.frames.put_nowait(rgb)
                 if self.stop_event.is_set():
                     break
+                was_paused = state.paused
                 mapper.process(sample, state, now)
+                if state.paused != was_paused:
+                    self.emit("status", "Mouse paused — open palm to resume" if state.paused else "Controls enabled")
                 self.emit("sample", sample["gesture"] if sample["detected"] else "No hand")
         except Exception as error:
             logging.exception("Tracking stopped")

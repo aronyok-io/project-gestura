@@ -83,3 +83,27 @@ class ActionTests(unittest.TestCase):
         self.process(sample('NONE'), 0.3)
         self.process(sample('THUMB_UP'), 0.35, 0.5)
         self.assertEqual(self.controller.actions, [('media', 'volumeup')])
+
+    def test_fist_pauses_without_click_and_palm_resumes(self):
+        self.process(sample('FIST', ratio=0.1), 0, 0.2)
+        self.assertTrue(self.state.paused)
+        self.process(sample(), 0.3, 0.5)
+        self.process(sample(ratio=0.1), 0.6, 0.8)
+        self.assertEqual(self.controller.actions, [])
+        self.process(sample('OPEN_PALM'), 1.0, 1.2)
+        self.assertFalse(self.state.paused)
+        self.process(sample(), 1.3, 1.5)
+        self.assertEqual(self.controller.actions, [('move', 0.5, 0.5)])
+
+    def test_hand_loss_does_not_resume_paused_mouse(self):
+        self.state.paused = True
+        self.process(sample(detected=False), 0)
+        self.process(sample(), 0.2, 0.4)
+        self.assertTrue(self.state.paused)
+        self.assertEqual(self.controller.actions, [])
+
+    def test_media_fist_still_mutes(self):
+        self.state.set_mode('Media')
+        self.state.enabled = True
+        self.process(sample('FIST', ratio=0.1), 0, 0.2)
+        self.assertEqual(self.controller.actions, [('media', 'mute')])

@@ -23,6 +23,20 @@ class ActionMapper:
         if not state.enabled or not sample["detected"]:
             self.reset()
             return
+        # Pause/resume is recognized before pinch handling: a closed fist can
+        # bring thumb and index close together without intending a click.
+        if state.mode == "Mouse" and sample["gesture"] in ("FIST", "OPEN_PALM"):
+            gesture = self.stabilizer.update(sample["gesture"], now)
+            self.pinched = False
+            self.pinch_since = None
+            self.scroll_y = None
+            if gesture != "NONE":
+                state.paused = gesture == "FIST"
+                self.controller.reset()
+            return
+        if state.mode == "Mouse" and state.paused:
+            self.stabilizer.update(sample["gesture"], now)
+            return
         position = sample.get("position")
         ratio = sample.get("pinch_ratio")
         if state.mode == "Mouse" and ratio is not None:
